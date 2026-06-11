@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Ajouter un conflit</h2>
+
+<form method="POST">
+
+    <label>UE 1</label>
+
+    <select name="ue1">
+
+        {% for ue in ues %}
+        <option value="{{ ue.id }}">
+            {{ ue.code }}
+        </option>
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <label>UE 2</label>
+
+    <select name="ue2">
+
+        {% for ue in ues %}
+        <option value="{{ ue.id }}">
+            {{ ue.code }}
+        </option>
+        {% endfor %}
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Enregistrer
+    </button>
+
+</form>
+
+{% endblock %}

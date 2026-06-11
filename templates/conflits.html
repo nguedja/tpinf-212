@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Liste des conflits</h2>
+
+<a href="/conflits/ajouter">
+    Ajouter un conflit
+</a>
+
+<table>
+
+<tr>
+    <th>UE 1</th>
+    <th>UE 2</th>
+</tr>
+
+{% for conflit in conflits %}
+
+<tr>
+    <td>{{ conflit.ue1.code }}</td>
+    <td>{{ conflit.ue2.code }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

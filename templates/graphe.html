@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Graphe des conflits</h2>
+
+<p>
+    Sommets :
+    {{ stats.sommets }}
+</p>
+
+<p>
+    Arêtes :
+    {{ stats.aretes }}
+</p>
+
+<h3>Degrés</h3>
+
+<ul>
+
+{% for sommet, degre in stats.degres.items() %}
+
+<li>
+    {{ sommet }}
+    : {{ degre }}
+</li>
+
+{% endfor %}
+
+</ul>
+
+<img
+src="{{ url_for('static',
+filename='images/graphe.png') }}"
+width="700"
+>
+
+{% endblock %}

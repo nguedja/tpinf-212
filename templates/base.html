@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Planification Examens{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>📚 Planification d'Examens par Coloration de Graphes</h1>
+
+    <nav style="background:#2563eb; padding:10px;">
+
+    <a href="/" style="color:white; margin-right:15px;">
+        Accueil
+    </a>
+
+    <a href="/ues" style="color:white; margin-right:15px;">
+        UE
+    </a>
+
+    <a href="/salles" style="color:white; margin-right:15px;">
+        Salles
+    </a>
+
+    <a href="/conflits" style="color:white; margin-right:15px;">
+        Conflits
+    </a>
+
+    <a href="/graphe" style="color:white; margin-right:15px;">
+        Graphe
+    </a>
+
+    <a href="/coloration" style="color:white; margin-right:15px;">
+        Coloration
+    </a>
+
+    <a href="/planning" style="color:white;">
+        Planning
+    </a>
+
+</nav>
+    </header>
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <footer>
+        <p>
+            Projet Théorie des Graphes - L2 Informatique 2025-2026
+        </p>
+    </footer>
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}">
+    </script>
+
+</body>
+</html>

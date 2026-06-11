@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>📅 Planning Final des Examens</h2>
+
+<!-- 🔴 AFFICHAGE DES ERREURS -->
+{% if erreurs and erreurs|length > 0 %}
+
+<h3 style="color:red;">
+    ⚠️ Contraintes non respectées
+</h3>
+
+<ul>
+    {% for e in erreurs %}
+        <li>{{ e }}</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+
+<h3 style="color:green;">
+    ✅ Planning valide (aucune erreur détectée)
+</h3>
+
+{% endif %}
+
+<br>
+
+<!-- 📥 EXPORT CSV -->
+{% if fichier %}
+
+<p>
+    📥 Télécharger le fichier CSV :
+    <a href="{{ fichier }}" download>
+        planning.csv
+    </a>
+</p>
+
+{% endif %}
+
+<br>
+
+<!-- 📊 TABLEAU PLANNING -->
+<table border="1" cellpadding="8" cellspacing="0">
+
+    <tr style="background:#eee;">
+        <th>UE</th>
+        <th>Créneau</th>
+        <th>Salle</th>
+    </tr>
+
+    {% for ligne in planning %}
+
+    <tr>
+        <td>{{ ligne.ue }}</td>
+        <td>{{ ligne.creneau }}</td>
+        <td>{{ ligne.salle }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Ajouter une UE</h2>
+{% if message %}
+    <p style="color:red;">
+        {{ message }}
+    </p>
+{% endif %}
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="code"
+        placeholder="Code UE"
+        required
+    >
+
+    <br><br>
+
+    <input
+        type="text"
+        name="nom"
+        placeholder="Nom UE"
+        required
+    >
+
+    <br><br>
+
+    <input
+        type="text"
+        name="filiere"
+        placeholder="Filière"
+        required
+    >
+
+    <br><br>
+
+    <input
+        type="text"
+        name="professeur"
+        placeholder="Professeur"
+        required
+    >
+
+    <br><br>
+
+    <input
+        type="number"
+        name="effectif"
+        placeholder="Effectif"
+        required
+    >
+
+    <br><br>
+
+    <label>
+        <input
+            type="checkbox"
+            name="besoin_labo"
+        >
+        Besoin d'un laboratoire
+    </label>
+
+    <br><br>
+
+    <button type="submit">
+        Enregistrer
+    </button>
+
+</form>
+
+{% endblock %}

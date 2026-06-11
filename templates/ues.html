@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Liste des UE</h2>
+
+<a href="/ues/ajouter">
+    Ajouter une UE
+</a>
+
+<table>
+
+    <tr>
+        <th>Code</th>
+        <th>Nom</th>
+        <th>Filière</th>
+        <th>Effectif</th>
+    </tr>
+
+    {% for ue in ues %}
+
+    <tr>
+        <td>{{ ue.code }}</td>
+        <td>{{ ue.nom }}</td>
+        <td>{{ ue.filiere }}</td>
+        <td>{{ ue.effectif }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Ajouter une salle</h2>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="nom"
+        placeholder="Nom"
+        required
+    >
+
+    <br><br>
+
+    <input
+        type="number"
+        name="capacite"
+        placeholder="Capacité"
+        required
+    >
+
+    <br><br>
+
+    <select name="type_salle">
+
+        <option value="standard">
+            Standard
+        </option>
+
+        <option value="labo">
+            Laboratoire
+        </option>
+
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Enregistrer
+    </button>
+
+</form>
+
+{% endblock %}

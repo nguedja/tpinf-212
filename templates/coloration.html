@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Coloration du graphe</h2>
+
+<h3>Welsh-Powell</h3>
+
+<p>
+Nombre de couleurs :
+{{ nb_wp }}
+</p>
+
+<table>
+
+<tr>
+<th>UE</th>
+<th>Couleur</th>
+</tr>
+
+{% for ue, couleur in wp.items() %}
+
+<tr>
+<td>{{ ue }}</td>
+<td>{{ couleur }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<hr>
+
+<h3>DSATUR</h3>
+
+<p>
+Nombre de couleurs :
+{{ nb_ds }}
+</p>
+
+<table>
+
+<tr>
+<th>UE</th>
+<th>Couleur</th>
+</tr>
+
+{% for ue, couleur in ds.items() %}
+
+<tr>
+<td>{{ ue }}</td>
+<td>{{ couleur }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

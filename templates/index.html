@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+Accueil
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <h2>Bienvenue</h2>
+
+    <p>
+        Cette application permet d'organiser automatiquement
+        les examens grâce à la théorie des graphes et aux
+        algorithmes de coloration.
+    </p>
+
+</section>
+
+<section class="cards">
+
+    <div class="card">
+        <h3>📘 UE</h3>
+        <p>Gestion des unités d'enseignement.</p>
+    </div>
+
+    <div class="card">
+        <h3>🏫 Salles</h3>
+        <p>Gestion des salles d'examen.</p>
+    </div>
+
+    <div class="card">
+        <h3>🎨 Coloration</h3>
+        <p>Welsh-Powell et DSATUR.</p>
+    </div>
+
+    <div class="card">
+        <h3>📅 Planning</h3>
+        <p>Génération automatique du planning.</p>
+    </div>
+
+</section>
+
+{% endblock %}

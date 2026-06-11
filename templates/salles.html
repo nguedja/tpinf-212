@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Liste des salles</h2>
+
+<a href="/salles/ajouter">
+    Ajouter une salle
+</a>
+
+<table>
+
+    <tr>
+        <th>Nom</th>
+        <th>Capacité</th>
+        <th>Type</th>
+    </tr>
+
+    {% for salle in salles %}
+
+    <tr>
+        <td>{{ salle.nom }}</td>
+        <td>{{ salle.capacite }}</td>
+        <td>{{ salle.type_salle }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}
