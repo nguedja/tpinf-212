@@ -25,6 +25,14 @@
 <div class="alert alert-error">{{ message }}</div>
 {% endif %}
 
+{% if nouveau_code %}
+<div class="alert alert-success">
+    <strong>Etablissement cree avec succes !</strong>
+    <p style="margin:0;">Code de securite : <strong style="font-size:1.3rem; letter-spacing:3px; color:#059669;">{{ nouveau_code }}</strong></p>
+    <p style="margin:6px 0 0 0; font-size:0.8rem;">Conservez ce code, il sera necessaire pour activer cet etablissement.</p>
+</div>
+{% endif %}
+
 <h3>Ajouter un etablissement</h3>
 
 <form method="POST" style="max-width:600px; display:flex; gap:10px; align-items:end; flex-wrap:wrap;">
@@ -43,12 +51,13 @@
 
 <div class="table-container">
 <table>
-    <tr><th>Nom</th><th>Adresse</th><th>Actions</th></tr>
+    <tr><th>Nom</th><th>Adresse</th><th>Code</th><th>Actions</th></tr>
     {% for e in etablissements %}
     <tr>
         <td><strong>{{ e.nom }}</strong></td>
         <td>{{ e.adresse }}</td>
-        <td style="display:flex; gap:8px;">
+        <td><code style="letter-spacing:2px; font-weight:600;">{{ e.code }}</code></td>
+        <td>
             {% if e.id != session.get('etablissement_id') %}
             <a href="/etablissements/selectionner/{{ e.id }}" class="btn btn-sm btn-primary">Selectionner</a>
             {% else %}

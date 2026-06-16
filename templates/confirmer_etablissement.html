@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Selectionner - {{ etablissement.nom }}{% endblock %}
+{% block toptitle %}Selectionner un etablissement{% endblock %}
+
+{% block content %}
+
+<h2>Selectionner etablissement</h2>
+
+<div class="card" style="max-width:450px; margin:30px auto; padding:30px;">
+    <h3>{{ etablissement.nom }}</h3>
+    {% if etablissement.adresse %}
+    <p>{{ etablissement.adresse }}</p>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for cat, msg in messages %}
+            <div class="alert alert-{{ cat }}">{{ msg }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <div class="form-group">
+            <label>Entrez le code de securite</label>
+            <input type="text" name="code" placeholder="Ex: A3B9K2" required
+                   maxlength="6" style="text-align:center; font-size:1.2rem; letter-spacing:4px; font-weight:600;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Activer cet etablissement</button>
+    </form>
+
+    <a href="/etablissements" class="btn" style="width:100%; margin-top:10px; justify-content:center;">Retour</a>
+</div>
+
+{% endblock %}

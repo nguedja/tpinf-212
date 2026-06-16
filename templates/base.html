@@ -10,7 +10,11 @@
 </head>
 <body>
 
-    <aside class="sidebar">
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <button class="hamburger" id="hamburger" onclick="toggleSidebar()">&#9776;</button>
+
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar-logo">
             <h1>Exam<span>Planner</span></h1>
             <small>Theorie des Graphes</small>
@@ -77,6 +81,13 @@
             {% block content %}{% endblock %}
         </div>
     </div>
+
+    <script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('sidebarOverlay').classList.toggle('open');
+    }
+    </script>
 
 </body>
 </html>

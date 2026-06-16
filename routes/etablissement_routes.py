@@ -4,7 +4,8 @@ from flask import (
     request,
     redirect,
     url_for,
-    session
+    session,
+    flash
 )
 
 from extensions import db
@@ -24,6 +25,7 @@ def liste_etablissements():
 
     etablissements = Etablissement.query.all()
     message = None
+    nouveau_code = None
 
     if request.method == "POST":
 
@@ -37,33 +39,55 @@ def liste_etablissements():
             message = "Cet etablissement existe deja !"
         else:
 
+            code = Etablissement.generer_code()
+
             etab = Etablissement(
                 nom=nom,
-                adresse=request.form.get("adresse", "")
+                adresse=request.form.get("adresse", ""),
+                code=code
             )
 
             db.session.add(etab)
             db.session.commit()
 
-            return redirect(
-                url_for("etablissement.liste_etablissements")
-            )
+            nouveau_code = code
 
     return render_template(
         "etablissements.html",
         etablissements=etablissements,
-        message=message
+        message=message,
+        nouveau_code=nouveau_code
     )
 
 
 @etablissement_bp.route(
-    "/etablissements/selectionner/<int:id>"
+    "/etablissements/selectionner/<int:id>",
+    methods=["GET", "POST"]
 )
 def selectionner(id):
 
-    session["etablissement_id"] = id
+    etab = Etablissement.query.get_or_404(id)
 
-    return redirect(url_for("index"))
+    if request.method == "POST":
+
+        code_saisi = request.form.get("code", "")
+
+        if code_saisi == etab.code:
+            session["etablissement_id"] = id
+            return redirect(url_for("index"))
+        else:
+            flash("Code incorrect !", "error")
+            return redirect(
+                url_for(
+                    "etablissement.selectionner",
+                    id=id
+                )
+            )
+
+    return render_template(
+        "confirmer_etablissement.html",
+        etablissement=etab
+    )
 
 
 @etablissement_bp.route(
