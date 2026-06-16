@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regles d'utilisation - ExamPlanner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: #cbd5e1;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* HERO */
+        .hero-rules {
+            position: relative;
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #1e293b 100%);
+            overflow: hidden;
+        }
+
+        .hero-rules::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(167, 139, 250, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
+            animation: floatBg 20s ease-in-out infinite;
+        }
+
+        @keyframes floatBg {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-20px, -10px); }
+        }
+
+        .hero-rules h1 {
+            position: relative;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f8fafc;
+            margin-bottom: 12px;
+            animation: fadeDown 0.8s ease;
+        }
+
+        .hero-rules h1 span { color: #a78bfa; }
+
+        .hero-rules p {
+            position: relative;
+            font-size: 1.1rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeDown 0.8s ease 0.2s both;
+        }
+
+        .hero-rules .badge {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+            padding: 6px 18px;
+            background: rgba(167, 139, 250, 0.15);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            border-radius: 20px;
+            color: #a78bfa;
+            font-size: 0.82rem;
+            font-weight: 600;
+            animation: fadeDown 0.8s ease 0.4s both;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* NAV */
+        .rules-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 16px;
+            flex-wrap: wrap;
+        }
+
+        .rules-nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 7px 16px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid transparent;
+        }
+
+        .rules-nav a:hover {
+            color: #a78bfa;
+            background: rgba(167, 139, 250, 0.1);
+            border-color: rgba(167, 139, 250, 0.2);
+        }
+
+        .rules-nav a .num {
+            display: inline-block;
+            background: rgba(167, 139, 250, 0.2);
+            color: #a78bfa;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 6px;
+        }
+
+        /* CONTENT */
+        .rules-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        /* STEP CARD */
+        .step {
+            position: relative;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step:hover {
+            border-color: var(--step-color, #a78bfa);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .step-number {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+
+        .step-body p {
+            color: #94a3b8;
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+        }
+
+        .step-body ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-body li {
+            position: relative;
+            padding: 8px 0 8px 24px;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .step-body li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--step-color, #a78bfa);
+            font-weight: 700;
+        }
+
+        .step-tip {
+            margin-top: 14px;
+            padding: 12px 16px;
+            background: rgba(167, 139, 250, 0.08);
+            border-left: 3px solid var(--step-color, #a78bfa);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: #a78bfa;
+        }
+
+        .step-tip strong { color: #c4b5fd; }
+
+        /* COLORS PER STEP */
+        .step-1 { --step-color: #3b82f6; }
+        .step-1 .step-number { background: #3b82f6; }
+        .step-2 { --step-color: #10b981; }
+        .step-2 .step-number { background: #10b981; }
+        .step-3 { --step-color: #f59e0b; }
+        .step-3 .step-number { background: #f59e0b; }
+        .step-4 { --step-color: #ef4444; }
+        .step-4 .step-number { background: #ef4444; }
+        .step-5 { --step-color: #8b5cf6; }
+        .step-5 .step-number { background: #8b5cf6; }
+        .step-6 { --step-color: #06b6d4; }
+        .step-6 .step-number { background: #06b6d4; }
+        .step-7 { --step-color: #22c55e; }
+        .step-7 .step-number { background: #22c55e; }
+
+        /* FLOW DIAGRAM */
+        .flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 30px 0;
+            padding: 24px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            animation: fadeDown 0.8s ease 0.6s both;
+        }
+
+        .flow-item {
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid #334155;
+            background: #1e293b;
+            transition: all 0.3s;
+        }
+
+        .flow-item:hover { transform: scale(1.05); }
+
+        .flow-arrow {
+            color: #475569;
+            font-size: 1.2rem;
+        }
+
+        /* BACK BTN */
+        .back-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #a78bfa;
+            color: white;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(167, 139, 250, 0.4);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .back-btn:hover { transform: scale(1.1); background: #8b5cf6; }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .hero-rules h1 { font-size: 1.6rem; }
+            .hero-rules p { font-size: 0.9rem; }
+            .step { padding: 20px; }
+            .step-title { font-size: 1rem; }
+            .step-header { gap: 10px; }
+            .step-number { width: 36px; height: 36px; font-size: 0.95rem; }
+            .rules-nav a { padding: 6px 10px; font-size: 0.75rem; }
+            .flow { padding: 14px; gap: 6px; }
+            .flow-item { padding: 7px 12px; font-size: 0.75rem; }
+            .back-btn { width: 44px; height: 44px; bottom: 16px; right: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-rules">
+        <h1>Comment utiliser <span>ExamPlanner</span> ?</h1>
+        <p>Suivez les etapes ci-dessous pour planifier vos examens en quelques clics.</p>
+        <div class="badge">Guide rapide &mdash; 2 minutes de lecture</div>
+    </div>
+
+    <nav class="rules-nav">
+        <a href="#etape1"><span class="num">1</span>Etablissement</a>
+        <a href="#etape2"><span class="num">2</span>Donnees</a>
+        <a href="#etape3"><span class="num">3</span>Contraintes</a>
+        <a href="#etape4"><span class="num">4</span>Graphe</a>
+        <a href="#etape5"><span class="num">5</span>Coloration</a>
+        <a href="#etape6"><span class="num">6</span>Planning</a>
+        <a href="#etape7"><span class="num">7</span>Telecharger</a>
+    </nav>
+
+    <div class="rules-content">
+
+        <div class="flow">
+            <div class="flow-item" style="border-color:#3b82f6; color:#3b82f6;">Etablissement</div>
+            <span class="flow-arrow">&rarr;</span>
+            <div class="flow-item" style="border-color:#10b981; color:#10b981;">Donnees</div>
+            <span class="flow-arrow">&rarr;</span>
+            <div class="flow-item" style="border-color:#ef4444; color:#ef4444;">Contraintes</div>
+            <span class="flow-arrow">&rarr;</span>
+            <div class="flow-item" style="border-color:#8b5cf6; color:#8b5cf6;">Graphe</div>
+            <span class="flow-arrow">&rarr;</span>
+            <div class="flow-item" style="border-color:#06b6d4; color:#06b6d4;">Coloration</div>
+            <span class="flow-arrow">&rarr;</span>
+            <div class="flow-item" style="border-color:#22c55e; color:#22c55e;">Planning</div>
+        </div>
+
+        <div class="step step-1" id="etape1">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title">Creer un etablissement</div>
+            </div>
+            <div class="step-body">
+                <p>Commencez par creer votre etablissement (ex: : <strong>Universite de Tlemcen</strong>).</p>
+                <ul>
+                    <li>Allez dans la section <strong>Etablissement</strong> dans le menu a gauche</li>
+                    <li>Cliquez sur <strong>Ajouter</strong> et remplissez le nom et l'adresse</li>
+                    <li>Un <strong>code de 6 caracteres</strong> sera genere automatiquement &mdash; <strong>notez-le !</strong></li>
+                    <li>Pour activer cet etablissement, cliquez sur <strong>Selectionner</strong> et entrez le code</li>
+                </ul>
+                <div class="step-tip">
+                    <strong>Important :</strong> Sans etablissement actif, aucune donnee ne peut etre saisie. Chaque etablissement est isole : vos donnees ne sont visibles que par vous.
+                </div>
+            </div>
+        </div>
+
+        <div class="step step-2" id="etape2">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title">Saisir les donnees</div>
+            </div>
+            <div class="step-body">
+                <p>Une fois l'etablissement actif, remplissez les donnees de base :</p>
+                <ul>
+                    <li><strong>UE (Unites d'Enseignement)</strong> : Ajoutez chaque matiere avec son code et son filia</li>
+                    <li><strong>Etudiants</strong> : Ajoutez les etudiants, puis <strong>inscrivez-les</strong> aux UE concernees</li>
+                    <li><strong>Salles</strong> : Definissez les salles disponibles avec leur capacite</li>
+                    <li><strong>Creneaux</strong> : Ajoutez les creneaux horaires (jour + heure debut/fin)</li>
+                </ul>
+                <div class="step-tip">
+                    <strong>Ordre conseille :</strong> UE &rarr; Etudiants &rarr; Inscriptions &rarr; Salles &rarr; Creneaux
+                </div>
+            </div>
+        </div>
+
+        <div class="step step-3" id="etape3">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title">Definir les contraintes</div>
+            </div>
+            <div class="step-body">
+                <p>Precisez les regles a respecter :</p>
+                <ul>
+                    <li><strong>Conflits</strong> : Deux UE qui ne peuvent pas avoir lieu au meme creneau (ex: meme filiere)</li>
+                    <li><strong>Interdictions</strong> : Un prof ne peut pas surveiller deux salles au meme creneau</li>
+                </ul>
+                <div class="step-tip">
+                    <strong>Astuce :</strong> Les conflits sont aussi generees automatiquement si deux UE partagent des etudiants ou le meme professeur.
+                </div>
+            </div>
+        </div>
+
+        <div class="step step-4" id="etape4">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <div class="step-title">Visualiser le graphe</div>
+            </div>
+            <div class="step-body">
+                <p>Le systeme construit automatiquement un <strong>graphe de conflits</strong> :</p>
+                <ul>
+                    <li>Chaque <strong>noeud</strong> = une UE</li>
+                    <li>Chaque <strong>arete</strong> = conflit entre deux UE (ne peuvent pas etre au meme creneau)</li>
+                    <li>Consultez la <strong>matrice d'adjacence</strong> et la <strong>liste d'adjacence</strong></li>
+                </ul>
+                <div class="step-tip">
+                    <strong>Concept :</strong> Ce graphe est le fondement de l'algorithme de coloration. Plus le graphe est dense, plus il faudra de couleurs (= creneaux).
+                </div>
+            </div>
+        </div>
+
+        <div class="step step-5" id="etape5">
+            <div class="step-header">
+                <div class="step-number">5</div>
+                <div class="step-title">Comparer les colorations</div>
+            </div>
+            <div class="step-body">
+                <p>Lancez les deux algorithmes pour comparer :</p>
+                <ul>
+                    <li><strong>Welsh-Powell</strong> : Algorithme glouton rapide, trie par nombre de contraintes</li>
+                    <li><strong>DSATUR</strong> : Plus precis, choisit le noeud avec le plus de saturation</li>
+                    <li>Vous verrez le <strong>temps d'execution</strong> de chaque algorithme</li>
+                    <li>Le <strong>nombre de couleurs</strong> (= nombre de creneaux utilises) est affiche</li>
+                </ul>
+                <div class="step-tip">
+                    <strong>Choisissez</strong> l'algorithme qui donne le moins de couleurs pour un planning plus compact.
+                </div>
+            </div>
+        </div>
+
+        <div class="step step-6" id="etape6">
+            <div class="step-header">
+                <div class="step-number">6</div>
+                <div class="step-title">Generer le planning</div>
+            </div>
+            <div class="step-body">
+                <p>Cliquez sur <strong>Generer le planning</strong> :</p>
+                <ul>
+                    <li>Le systeme affecte automatiquement les <strong>salles</strong> en fonction de la capacite</li>
+                    <li>Les <strong>creneaux reels</strong> (jour + heure) sont affiches</li>
+                    <li>Le planning est verifie : <strong>filiere eloignee</strong>, <strong>charge equilibree</strong>, <strong>aucune interdiction violee</strong></li>
+                    <li>Vous pouvez relancer la generation pour trouver un meilleur resultat</li>
+                </ul>
+                <div class="step-tip">
+                    <strong>Verification :</strong> Le systeme vous indique si des alertes existent (creneau surcharge, filiere proche, etc.)
+                </div>
+            </div>
+        </div>
+
+        <div class="step step-7" id="etape7">
+            <div class="step-header">
+                <div class="step-number">7</div>
+                <div class="step-title">Telecharger et exporter</div>
+            </div>
+            <div class="step-body">
+                <p>Exportez votre planning :</p>
+                <ul>
+                    <li><strong>CSV</strong> : Tableau au format Creneau x Salle, pret a etre imprime ou partage</li>
+                    <li><strong>PDF</strong> : Document formate avec en-tete colore, pret a imprimer</li>
+                    <li>Les deux formats sont accessibles depuis la page <strong>Planning</strong></li>
+                </ul>
+                <div class="step-tip">
+                    <strong>Finalise !</strong> Vous avez un planning d'examens optimise, sans conflits, et pret a etre communique.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="/" class="back-btn" title="Retour a l'accueil">&#8592;</a>
+
+    <script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.step').forEach(step => observer.observe(step));
+
+    document.querySelectorAll('.rules-nav a').forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+    </script>
+
+</body>
+</html>

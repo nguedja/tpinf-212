@@ -11,6 +11,7 @@ from routes.etudiant_routes import etudiant_bp
 from routes.interdiction_routes import interdiction_bp
 from routes.creneau_routes import creneau_bp
 from routes.etablissement_routes import etablissement_bp
+from routes.regles_routes import regles_bp
 
 
 app = Flask(__name__)
@@ -28,6 +29,7 @@ app.register_blueprint(planning_bp)
 app.register_blueprint(etudiant_bp)
 app.register_blueprint(interdiction_bp)
 app.register_blueprint(creneau_bp)
+app.register_blueprint(regles_bp)
 
 
 @app.route("/")
