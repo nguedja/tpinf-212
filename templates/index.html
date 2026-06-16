@@ -1,45 +1,38 @@
 {% extends "base.html" %}
 
-{% block title %}
-Accueil
-{% endblock %}
+{% block title %}Accueil{% endblock %}
+{% block toptitle %}Accueil{% endblock %}
 
 {% block content %}
 
-<section class="hero">
-
-    <h2>Bienvenue</h2>
-
-    <p>
-        Cette application permet d'organiser automatiquement
-        les examens grâce à la théorie des graphes et aux
-        algorithmes de coloration.
-    </p>
-
+<section class="hero" style="--accent:#a78bfa; --accent-light:rgba(167,139,250,0.08);">
+    <h2>Planification d'Examens</h2>
+    <p>Organisez automatiquement vos examens grace a la theorie des graphes et aux algorithmes de coloration.</p>
 </section>
 
-<section class="cards">
+{% if session.get('etablissement_id') %}
+<p style="text-align:center;">
+    Etablissement actif :
+    <span class="etab-badge">
+        {% for e in etablissements if e.id == session.etablissement_id %}
+            {{ e.nom }}
+        {% endfor %}
+    </span>
+</p>
+{% else %}
+<div class="alert alert-warning" style="max-width:600px; margin:20px auto;">
+    Selectionnez un etablissement pour commencer.
+    <a href="/etablissements" style="font-weight:600;"> Choisir un etablissement</a>
+</div>
+{% endif %}
 
-    <div class="card">
-        <h3>📘 UE</h3>
-        <p>Gestion des unités d'enseignement.</p>
-    </div>
-
-    <div class="card">
-        <h3>🏫 Salles</h3>
-        <p>Gestion des salles d'examen.</p>
-    </div>
-
-    <div class="card">
-        <h3>🎨 Coloration</h3>
-        <p>Welsh-Powell et DSATUR.</p>
-    </div>
-
-    <div class="card">
-        <h3>📅 Planning</h3>
-        <p>Génération automatique du planning.</p>
-    </div>
-
+<section class="cards" style="--accent:#a78bfa;">
+    <a href="/ues" class="card"><h3>UE</h3><p>Unites d'enseignement</p></a>
+    <a href="/etudiants" class="card"><h3>Etudiants</h3><p>Inscriptions et liens</p></a>
+    <a href="/salles" class="card"><h3>Salles</h3><p>Salles d'examen</p></a>
+    <a href="/creneaux" class="card"><h3>Creneaux</h3><p>Plages horaires</p></a>
+    <a href="/coloration" class="card"><h3>Coloration</h3><p>Welsh-Powell / DSATUR</p></a>
+    <a href="/planning" class="card"><h3>Planning</h3><p>Generation auto</p></a>
 </section>
 
 {% endblock %}

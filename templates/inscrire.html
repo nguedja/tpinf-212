@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Inscrire UE{% endblock %}
+{% block toptitle %}Inscription UE{% endblock %}
+
+{% block content %}
+
+<h2>Inscrire {{ etudiant.nom }} a une UE</h2>
+
+{% if message %}
+<div class="alert alert-error">{{ message }}</div>
+{% endif %}
+
+<h3>UE deja inscrites</h3>
+
+{% if etudiant.inscriptions %}
+<div class="table-container">
+<table>
+    <tr><th>Code</th><th>Nom</th><th>Action</th></tr>
+    {% for insc in etudiant.inscriptions %}
+    <tr>
+        <td><strong>{{ insc.ue.code }}</strong></td>
+        <td>{{ insc.ue.nom }}</td>
+        <td>
+            <form method="POST" action="/etudiants/{{ etudiant.id }}/desinscrire/{{ insc.id }}" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Desinscrire</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+{% else %}
+<p>Aucune inscription.</p>
+{% endif %}
+
+<h3>Inscrire a une nouvelle UE</h3>
+
+<form method="POST" style="max-width:500px;">
+    <div class="form-group">
+        <label>Choisir une UE</label>
+        <select name="ue_id" required>
+            <option value="">-- Selectionner --</option>
+            {% for ue in ues %}
+            <option value="{{ ue.id }}">{{ ue.code }} - {{ ue.nom }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Inscrire</button>
+    <a href="/etudiants" class="btn">Retour</a>
+</form>
+
+{% endblock %}

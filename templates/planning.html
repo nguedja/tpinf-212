@@ -1,65 +1,88 @@
 {% extends "base.html" %}
 
+{% block title %}Planning{% endblock %}
+{% block toptitle %}Planning Final{% endblock %}
+
 {% block content %}
 
-<h2>📅 Planning Final des Examens</h2>
+<h2>Planning Final des Examens</h2>
 
-<!-- 🔴 AFFICHAGE DES ERREURS -->
 {% if erreurs and erreurs|length > 0 %}
-
-<h3 style="color:red;">
-    ⚠️ Contraintes non respectées
-</h3>
-
-<ul>
-    {% for e in erreurs %}
-        <li>{{ e }}</li>
-    {% endfor %}
-</ul>
-
+<div class="alert alert-error">
+    <strong>Contraintes non respectees</strong>
+    <ul>{% for e in erreurs %}<li>{{ e }}</li>{% endfor %}</ul>
+</div>
 {% else %}
-
-<h3 style="color:green;">
-    ✅ Planning valide (aucune erreur détectée)
-</h3>
-
+<div class="alert alert-success">Planning valide - aucune erreur detectee</div>
 {% endif %}
 
-<br>
-
-<!-- 📥 EXPORT CSV -->
-{% if fichier %}
-
-<p>
-    📥 Télécharger le fichier CSV :
-    <a href="{{ fichier }}" download>
-        planning.csv
-    </a>
-</p>
-
+{% if warnings_filiere and warnings_filiere|length > 0 %}
+<div class="alert alert-warning">
+    <strong>Espacement filiere</strong>
+    <ul>{% for w in warnings_filiere %}<li>{{ w }}</li>{% endfor %}</ul>
+</div>
 {% endif %}
 
-<br>
+{% if warnings_charge and warnings_charge|length > 0 %}
+<div class="alert alert-warning">
+    <strong>Equilibre de charge</strong>
+    <ul>{% for w in warnings_charge %}<li>{{ w }}</li>{% endfor %}</ul>
+</div>
+{% endif %}
 
-<!-- 📊 TABLEAU PLANNING -->
-<table border="1" cellpadding="8" cellspacing="0">
+<div class="stats-row">
+    <div class="stat-box">
+        <span class="stat-number">{{ nb_creneaux }}</span>
+        <span class="stat-label">Creneaux utilises</span>
+    </div>
+</div>
 
-    <tr style="background:#eee;">
-        <th>UE</th>
-        <th>Créneau</th>
-        <th>Salle</th>
-    </tr>
+{% if infos_charge %}
+<h3>Charge par creneau</h3>
+<div class="charge-grid">
+{% for c, n in infos_charge.par_creneau.items() %}
+    <div class="charge-item">
+        <span class="charge-creneau">{{ c }}</span>
+        <span class="charge-nb">{{ n }} examen(s)</span>
+    </div>
+{% endfor %}
+</div>
+{% endif %}
 
-    {% for ligne in planning %}
+<div class="toolbar">
+    <a href="/planning/telecharger" class="btn btn-success">Telecharger CSV</a>
+    <a href="/planning/telecharger-pdf" class="btn btn-primary">Telecharger PDF</a>
+</div>
 
-    <tr>
-        <td>{{ ligne.ue }}</td>
-        <td>{{ ligne.creneau }}</td>
-        <td>{{ ligne.salle }}</td>
-    </tr>
+<h3>Graphe colore</h3>
 
+<div class="graph-container">
+    <img src="{{ url_for('static', filename='images/graphe_colore.png') }}" alt="Graphe colore">
+</div>
+
+<h3>Tableau creneau x salle</h3>
+
+<div class="table-container">
+<table>
+<tr>
+    <th>Creneau</th>
+    {% for s in salles_list %}<th>{{ s }}</th>{% endfor %}
+</tr>
+{% for c in creneaux_list %}
+<tr>
+    <td class="creneau-label">{{ c }}</td>
+    {% for s in salles_list %}
+    <td>
+        {% for l in planning %}
+            {% if l.creneau == c and l.salle == s %}
+                <span class="ue-badge">{{ l.ue }} <small>({{ l.effectif }})</small></span>
+            {% endif %}
+        {% endfor %}
+    </td>
     {% endfor %}
-
+</tr>
+{% endfor %}
 </table>
+</div>
 
 {% endblock %}

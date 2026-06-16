@@ -1,59 +1,68 @@
 {% extends "base.html" %}
 
+{% block title %}Coloration{% endblock %}
+{% block toptitle %}Coloration du graphe{% endblock %}
+
 {% block content %}
 
 <h2>Coloration du graphe</h2>
 
+<div class="stats-row">
+    <div class="stat-box">
+        <span class="stat-number">{{ nb_sommets }}</span>
+        <span class="stat-label">Sommets</span>
+    </div>
+    <div class="stat-box">
+        <span class="stat-number">{{ nb_aretes }}</span>
+        <span class="stat-label">Aretes</span>
+    </div>
+    <div class="stat-box">
+        <span class="stat-number">{{ nb_wp }}</span>
+        <span class="stat-label">WP couleurs</span>
+    </div>
+    <div class="stat-box">
+        <span class="stat-number">{{ nb_ds }}</span>
+        <span class="stat-label">DSATUR couleurs</span>
+    </div>
+</div>
+
+<div class="stats-row">
+    <div class="stat-box">
+        <span class="stat-number">{{ temps_wp }}</span>
+        <span class="stat-label">WP (ms)</span>
+    </div>
+    <div class="stat-box">
+        <span class="stat-number">{{ temps_ds }}</span>
+        <span class="stat-label">DSATUR (ms)</span>
+    </div>
+</div>
+
 <h3>Welsh-Powell</h3>
 
-<p>
-Nombre de couleurs :
-{{ nb_wp }}
-</p>
-
+<div class="table-container">
 <table>
-
-<tr>
-<th>UE</th>
-<th>Couleur</th>
-</tr>
-
-{% for ue, couleur in wp.items() %}
-
-<tr>
-<td>{{ ue }}</td>
-<td>{{ couleur }}</td>
-</tr>
-
-{% endfor %}
-
+    <tr><th>UE</th><th>Couleur</th></tr>
+    {% for ue, couleur in wp.items() %}
+    <tr>
+        <td><strong>{{ ue }}</strong></td>
+        <td><span class="ue-badge">{{ couleur }}</span></td>
+    </tr>
+    {% endfor %}
 </table>
-
-<hr>
+</div>
 
 <h3>DSATUR</h3>
 
-<p>
-Nombre de couleurs :
-{{ nb_ds }}
-</p>
-
+<div class="table-container">
 <table>
-
-<tr>
-<th>UE</th>
-<th>Couleur</th>
-</tr>
-
-{% for ue, couleur in ds.items() %}
-
-<tr>
-<td>{{ ue }}</td>
-<td>{{ couleur }}</td>
-</tr>
-
-{% endfor %}
-
+    <tr><th>UE</th><th>Couleur</th></tr>
+    {% for ue, couleur in ds.items() %}
+    <tr>
+        <td><strong>{{ ue }}</strong></td>
+        <td><span class="ue-badge">{{ couleur }}</span></td>
+    </tr>
+    {% endfor %}
 </table>
+</div>
 
 {% endblock %}

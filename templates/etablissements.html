@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Etablissements{% endblock %}
+{% block toptitle %}Etablissements{% endblock %}
+
+{% block content %}
+
+<h2>Etablissements</h2>
+
+{% if session.get('etablissement_id') %}
+<p>Etablissement actif :
+    <span class="etab-badge">
+        {% for e in etablissements if e.id == session.etablissement_id %}
+            {{ e.nom }}
+        {% endfor %}
+    </span>
+</p>
+{% else %}
+<div class="alert alert-warning">
+    Aucun etablissement selectionne.
+</div>
+{% endif %}
+
+{% if message %}
+<div class="alert alert-error">{{ message }}</div>
+{% endif %}
+
+<h3>Ajouter un etablissement</h3>
+
+<form method="POST" style="max-width:600px; display:flex; gap:10px; align-items:end; flex-wrap:wrap;">
+    <div class="form-group" style="flex:1; min-width:200px;">
+        <label>Nom</label>
+        <input type="text" name="nom" placeholder="Nom de l'etablissement" required>
+    </div>
+    <div class="form-group" style="flex:1; min-width:200px;">
+        <label>Adresse</label>
+        <input type="text" name="adresse" placeholder="Adresse (optionnel)">
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-bottom:16px;">Ajouter</button>
+</form>
+
+<h3>Liste</h3>
+
+<div class="table-container">
+<table>
+    <tr><th>Nom</th><th>Adresse</th><th>Actions</th></tr>
+    {% for e in etablissements %}
+    <tr>
+        <td><strong>{{ e.nom }}</strong></td>
+        <td>{{ e.adresse }}</td>
+        <td style="display:flex; gap:8px;">
+            {% if e.id != session.get('etablissement_id') %}
+            <a href="/etablissements/selectionner/{{ e.id }}" class="btn btn-sm btn-primary">Selectionner</a>
+            {% else %}
+            <span class="success-text" style="padding:5px 12px;">Actif</span>
+            {% endif %}
+            <form method="POST" action="/etablissements/supprimer/{{ e.id }}" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+{% endblock %}

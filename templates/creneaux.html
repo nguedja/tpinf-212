@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Creneaux{% endblock %}
+{% block toptitle %}Creneaux horaires{% endblock %}
+
+{% block content %}
+
+<div class="list-page-header">
+    <h2>Creneaux</h2>
+    <a href="/creneaux/ajouter" class="btn btn-primary">+ Ajouter</a>
+</div>
+
+<div class="table-container">
+<table>
+    <tr>
+        <th>Label</th>
+        <th>Jour</th>
+        <th>Heure debut</th>
+        <th>Heure fin</th>
+        <th>Action</th>
+    </tr>
+    {% for c in creneaux %}
+    <tr>
+        <td><strong>{{ c.label }}</strong></td>
+        <td>{{ c.jour }}</td>
+        <td>{{ c.heure_debut }}</td>
+        <td>{{ c.heure_fin }}</td>
+        <td>
+            <form method="POST" action="/creneaux/supprimer/{{ c.id }}" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+{% endblock %}

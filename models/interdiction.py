@@ -1,9 +1,9 @@
 from extensions import db
 
 
-class Conflit(db.Model):
+class Interdiction(db.Model):
 
-    __tablename__ = "conflits"
+    __tablename__ = "interdictions"
 
     id = db.Column(
         db.Integer,
@@ -28,6 +28,11 @@ class Conflit(db.Model):
         nullable=False
     )
 
+    raison = db.Column(
+        db.String(200),
+        default="Interdiction explicite"
+    )
+
     ue1 = db.relationship(
         "UE",
         foreign_keys=[ue1_id]
@@ -40,8 +45,8 @@ class Conflit(db.Model):
 
     etablissement = db.relationship(
         "Etablissement",
-        backref=db.backref("conflits", lazy=True)
+        backref=db.backref("interdictions", lazy=True)
     )
 
     def __repr__(self):
-        return f"{self.ue1_id} - {self.ue2_id}"
+        return f"{self.ue1.code} interdit avec {self.ue2.code}"

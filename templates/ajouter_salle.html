@@ -1,47 +1,30 @@
 {% extends "base.html" %}
 
+{% block title %}Ajouter salle{% endblock %}
+{% block toptitle %}Ajouter une salle{% endblock %}
+
 {% block content %}
 
 <h2>Ajouter une salle</h2>
 
-<form method="POST">
-
-    <input
-        type="text"
-        name="nom"
-        placeholder="Nom"
-        required
-    >
-
-    <br><br>
-
-    <input
-        type="number"
-        name="capacite"
-        placeholder="Capacité"
-        required
-    >
-
-    <br><br>
-
-    <select name="type_salle">
-
-        <option value="standard">
-            Standard
-        </option>
-
-        <option value="labo">
-            Laboratoire
-        </option>
-
-    </select>
-
-    <br><br>
-
-    <button type="submit">
-        Enregistrer
-    </button>
-
+<form method="POST" style="max-width:500px;">
+    <div class="form-group">
+        <label>Nom</label>
+        <input type="text" name="nom" placeholder="ex: Amphi A" required>
+    </div>
+    <div class="form-group">
+        <label>Capacite</label>
+        <input type="number" name="capacite" placeholder="Nombre de places" required>
+    </div>
+    <div class="form-group">
+        <label>Type</label>
+        <select name="type_salle" required>
+            <option value="standard">Standard</option>
+            <option value="labo">Laboratoire</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a href="/salles" class="btn">Annuler</a>
 </form>
 
 {% endblock %}

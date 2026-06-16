@@ -1,75 +1,42 @@
 {% extends "base.html" %}
 
+{% block title %}Ajouter UE{% endblock %}
+{% block toptitle %}Ajouter une UE{% endblock %}
+
 {% block content %}
 
 <h2>Ajouter une UE</h2>
+
 {% if message %}
-    <p style="color:red;">
-        {{ message }}
-    </p>
+<div class="alert alert-error">{{ message }}</div>
 {% endif %}
 
-<form method="POST">
-
-    <input
-        type="text"
-        name="code"
-        placeholder="Code UE"
-        required
-    >
-
-    <br><br>
-
-    <input
-        type="text"
-        name="nom"
-        placeholder="Nom UE"
-        required
-    >
-
-    <br><br>
-
-    <input
-        type="text"
-        name="filiere"
-        placeholder="Filière"
-        required
-    >
-
-    <br><br>
-
-    <input
-        type="text"
-        name="professeur"
-        placeholder="Professeur"
-        required
-    >
-
-    <br><br>
-
-    <input
-        type="number"
-        name="effectif"
-        placeholder="Effectif"
-        required
-    >
-
-    <br><br>
-
-    <label>
-        <input
-            type="checkbox"
-            name="besoin_labo"
-        >
-        Besoin d'un laboratoire
-    </label>
-
-    <br><br>
-
-    <button type="submit">
-        Enregistrer
-    </button>
-
+<form method="POST" style="max-width:500px;">
+    <div class="form-group">
+        <label>Code UE</label>
+        <input type="text" name="code" placeholder="ex: INFO201" required>
+    </div>
+    <div class="form-group">
+        <label>Nom</label>
+        <input type="text" name="nom" placeholder="Nom de l'UE" required>
+    </div>
+    <div class="form-group">
+        <label>Filiere</label>
+        <input type="text" name="filiere" placeholder="ex: Informatique" required>
+    </div>
+    <div class="form-group">
+        <label>Professeur</label>
+        <input type="text" name="professeur" placeholder="Nom du professeur" required>
+    </div>
+    <div class="form-group">
+        <label>Effectif</label>
+        <input type="number" name="effectif" placeholder="Nombre d'etudiants" required>
+    </div>
+    <div class="form-group">
+        <label><input type="checkbox" name="besoin_labo"> Besoin d'un laboratoire</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a href="/ues" class="btn">Annuler</a>
 </form>
 
 {% endblock %}

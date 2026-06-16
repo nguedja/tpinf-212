@@ -1,9 +1,9 @@
 from extensions import db
 
 
-class Salle(db.Model):
+class Creneau(db.Model):
 
-    __tablename__ = "salles"
+    __tablename__ = "creneaux"
 
     id = db.Column(
         db.Integer,
@@ -16,25 +16,30 @@ class Salle(db.Model):
         nullable=False
     )
 
-    nom = db.Column(
+    label = db.Column(
         db.String(50),
         nullable=False
     )
 
-    capacite = db.Column(
-        db.Integer,
+    heure_debut = db.Column(
+        db.String(5),
         nullable=False
     )
 
-    type_salle = db.Column(
+    heure_fin = db.Column(
+        db.String(5),
+        nullable=False
+    )
+
+    jour = db.Column(
         db.String(20),
         nullable=False
     )
 
     etablissement = db.relationship(
         "Etablissement",
-        backref=db.backref("salles", lazy=True)
+        backref=db.backref("creneaux", lazy=True)
     )
 
     def __repr__(self):
-        return self.nom
+        return f"{self.jour} {self.heure_debut}-{self.heure_fin}"

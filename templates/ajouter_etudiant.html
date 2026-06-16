@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter etudiant{% endblock %}
+{% block toptitle %}Ajouter un etudiant{% endblock %}
+
+{% block content %}
+
+<h2>Ajouter un etudiant</h2>
+
+{% if message %}
+<div class="alert alert-error">{{ message }}</div>
+{% endif %}
+
+<form method="POST" style="max-width:500px;">
+    <div class="form-group">
+        <label>Matricule</label>
+        <input type="text" name="matricule" placeholder="ex: ETU2025001" required>
+    </div>
+    <div class="form-group">
+        <label>Nom complet</label>
+        <input type="text" name="nom" placeholder="Nom et prenom" required>
+    </div>
+    <div class="form-group">
+        <label>Filiere</label>
+        <input type="text" name="filiere" placeholder="ex: Informatique" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a href="/etudiants" class="btn">Annuler</a>
+</form>
+
+{% endblock %}

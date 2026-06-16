@@ -1,29 +1,25 @@
 {% extends "base.html" %}
 
+{% block title %}Conflits{% endblock %}
+{% block toptitle %}Conflits manuels{% endblock %}
+
 {% block content %}
 
-<h2>Liste des conflits</h2>
+<div class="list-page-header">
+    <h2>Conflits</h2>
+    <a href="/conflits/ajouter" class="btn btn-primary">+ Ajouter</a>
+</div>
 
-<a href="/conflits/ajouter">
-    Ajouter un conflit
-</a>
-
+<div class="table-container">
 <table>
-
-<tr>
-    <th>UE 1</th>
-    <th>UE 2</th>
-</tr>
-
-{% for conflit in conflits %}
-
-<tr>
-    <td>{{ conflit.ue1.code }}</td>
-    <td>{{ conflit.ue2.code }}</td>
-</tr>
-
-{% endfor %}
-
+    <tr><th>UE 1</th><th>UE 2</th></tr>
+    {% for conflit in conflits %}
+    <tr>
+        <td><strong>{{ conflit.ue1.code }}</strong></td>
+        <td><strong>{{ conflit.ue2.code }}</strong></td>
+    </tr>
+    {% endfor %}
 </table>
+</div>
 
 {% endblock %}

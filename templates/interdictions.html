@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Interdictions{% endblock %}
+{% block toptitle %}Interdictions explicites{% endblock %}
+
+{% block content %}
+
+<div class="list-page-header">
+    <h2>Interdictions</h2>
+    <a href="/interdictions/ajouter" class="btn btn-primary">+ Ajouter</a>
+</div>
+
+<p>Ces paires d'UE ne doivent pas avoir lieu au meme jour.</p>
+
+<div class="table-container">
+<table>
+    <tr>
+        <th>UE 1</th>
+        <th>UE 2</th>
+        <th>Raison</th>
+        <th>Action</th>
+    </tr>
+    {% for inter in interdictions %}
+    <tr>
+        <td><strong>{{ inter.ue1.code }}</strong></td>
+        <td><strong>{{ inter.ue2.code }}</strong></td>
+        <td>{{ inter.raison }}</td>
+        <td>
+            <form method="POST" action="/interdictions/supprimer/{{ inter.id }}" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+{% endblock %}

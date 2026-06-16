@@ -1,4 +1,4 @@
-from app import db
+from extensions import db
 
 
 class Etudiant(db.Model):
@@ -7,9 +7,14 @@ class Etudiant(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
+    etablissement_id = db.Column(
+        db.Integer,
+        db.ForeignKey("etablissements.id"),
+        nullable=False
+    )
+
     matricule = db.Column(
         db.String(30),
-        unique=True,
         nullable=False
     )
 
@@ -21,6 +26,11 @@ class Etudiant(db.Model):
     filiere = db.Column(
         db.String(50),
         nullable=False
+    )
+
+    etablissement = db.relationship(
+        "Etablissement",
+        backref=db.backref("etudiants", lazy=True)
     )
 
     def __repr__(self):

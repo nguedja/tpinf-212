@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter creneau{% endblock %}
+{% block toptitle %}Ajouter un creneau{% endblock %}
+
+{% block content %}
+
+<h2>Ajouter un creneau horaire</h2>
+
+<form method="POST" style="max-width:500px;">
+    <div class="form-group">
+        <label>Label</label>
+        <input type="text" name="label" placeholder="ex: Creneau 1" required>
+    </div>
+    <div class="form-group">
+        <label>Jour</label>
+        <select name="jour" required>
+            <option value="Lundi">Lundi</option>
+            <option value="Mardi">Mardi</option>
+            <option value="Mercredi">Mercredi</option>
+            <option value="Jeudi">Jeudi</option>
+            <option value="Vendredi">Vendredi</option>
+            <option value="Samedi">Samedi</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Heure debut</label>
+        <input type="time" name="heure_debut" required>
+    </div>
+    <div class="form-group">
+        <label>Heure fin</label>
+        <input type="time" name="heure_fin" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+    <a href="/creneaux" class="btn">Annuler</a>
+</form>
+
+{% endblock %}

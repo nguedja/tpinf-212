@@ -1,38 +1,76 @@
 {% extends "base.html" %}
 
+{% block title %}Graphe{% endblock %}
+{% block toptitle %}Graphe des conflits{% endblock %}
+
 {% block content %}
 
 <h2>Graphe des conflits</h2>
 
-<p>
-    Sommets :
-    {{ stats.sommets }}
-</p>
+<div class="stats-row">
+    <div class="stat-box">
+        <span class="stat-number">{{ stats.sommets }}</span>
+        <span class="stat-label">Sommets</span>
+    </div>
+    <div class="stat-box">
+        <span class="stat-number">{{ stats.aretes }}</span>
+        <span class="stat-label">Aretes</span>
+    </div>
+</div>
 
-<p>
-    Arêtes :
-    {{ stats.aretes }}
-</p>
+<h3>Degres</h3>
 
-<h3>Degrés</h3>
+<div class="table-container">
+<table>
+    <tr><th>Sommet</th><th>Degre</th></tr>
+    {% for sommet, degre in stats.degres.items() %}
+    <tr>
+        <td><strong>{{ sommet }}</strong></td>
+        <td>{{ degre }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
 
-<ul>
+<h3>Visualisation</h3>
 
-{% for sommet, degre in stats.degres.items() %}
+<div class="graph-container">
+    <img src="{{ url_for('static', filename='images/graphe.png') }}" alt="Graphe">
+</div>
 
-<li>
-    {{ sommet }}
-    : {{ degre }}
-</li>
+<h3>Matrice d'adjacence</h3>
 
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<tr>
+    <th></th>
+    {% for noeud in noeuds %}
+    <th>{{ noeud }}</th>
+    {% endfor %}
+</tr>
+{% for i in range(noeuds | length) %}
+<tr>
+    <td class="creneau-label">{{ noeuds[i] }}</td>
+    {% for j in range(noeuds | length) %}
+    <td style="text-align:center;">{{ matrice[i][j] }}</td>
+    {% endfor %}
+</tr>
 {% endfor %}
+</table>
+</div>
 
-</ul>
+<h3>Liste d'adjacence</h3>
 
-<img
-src="{{ url_for('static',
-filename='images/graphe.png') }}"
-width="700"
->
+<div class="table-container">
+<table>
+    <tr><th>Sommet</th><th>Voisins</th></tr>
+    {% for sommet, voisins in liste.items() %}
+    <tr>
+        <td><strong>{{ sommet }}</strong></td>
+        <td>{% if voisins %}{{ voisins | join(", ") }}{% else %}-{% endif %}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
 
 {% endblock %}

@@ -10,9 +10,14 @@ class UE(db.Model):
         primary_key=True
     )
 
+    etablissement_id = db.Column(
+        db.Integer,
+        db.ForeignKey("etablissements.id"),
+        nullable=False
+    )
+
     code = db.Column(
         db.String(20),
-        unique=True,
         nullable=False
     )
 
@@ -39,6 +44,11 @@ class UE(db.Model):
     besoin_labo = db.Column(
         db.Boolean,
         default=False
+    )
+
+    etablissement = db.relationship(
+        "Etablissement",
+        backref=db.backref("ues", lazy=True)
     )
 
     def __repr__(self):

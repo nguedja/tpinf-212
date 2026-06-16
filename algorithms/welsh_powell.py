@@ -1,10 +1,16 @@
-def welsh_powell(G):
+def welsh_powell(G, effectifs=None):
 
     couleurs = {}
 
+    if effectifs is None:
+        effectifs = {}
+
     sommets = sorted(
         G.nodes(),
-        key=lambda x: G.degree(x),
+        key=lambda x: (
+            G.degree(x),
+            effectifs.get(x, 0)
+        ),
         reverse=True
     )
 

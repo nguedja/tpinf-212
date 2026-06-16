@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}Ajouter conflit{% endblock %}
-{% block toptitle %}Ajouter un conflit{% endblock %}
+{% block title %}Ajouter interdiction{% endblock %}
+{% block toptitle %}Ajouter une interdiction{% endblock %}
 
 {% block content %}
 
-<h2>Ajouter un conflit</h2>
+<h2>Ajouter une interdiction</h2>
+
+{% if message %}
+<div class="alert alert-error">{{ message }}</div>
+{% endif %}
 
 <form method="POST" style="max-width:500px;">
     <div class="form-group">
@@ -26,8 +30,12 @@
             {% endfor %}
         </select>
     </div>
+    <div class="form-group">
+        <label>Raison (optionnel)</label>
+        <input type="text" name="raison" placeholder="Raison de l'interdiction">
+    </div>
     <button type="submit" class="btn btn-primary">Enregistrer</button>
-    <a href="/conflits" class="btn">Annuler</a>
+    <a href="/interdictions" class="btn">Annuler</a>
 </form>
 
 {% endblock %}

@@ -1,33 +1,36 @@
 {% extends "base.html" %}
 
+{% block title %}UE{% endblock %}
+{% block toptitle %}Unites d'Enseignement{% endblock %}
+
 {% block content %}
 
-<h2>Liste des UE</h2>
+<div class="list-page-header">
+    <h2>UE</h2>
+    <a href="/ues/ajouter" class="btn btn-primary">+ Ajouter</a>
+</div>
 
-<a href="/ues/ajouter">
-    Ajouter une UE
-</a>
-
+<div class="table-container">
 <table>
-
     <tr>
         <th>Code</th>
         <th>Nom</th>
-        <th>Filière</th>
+        <th>Filiere</th>
+        <th>Professeur</th>
         <th>Effectif</th>
+        <th>Labo</th>
     </tr>
-
     {% for ue in ues %}
-
     <tr>
-        <td>{{ ue.code }}</td>
+        <td><strong>{{ ue.code }}</strong></td>
         <td>{{ ue.nom }}</td>
         <td>{{ ue.filiere }}</td>
+        <td>{{ ue.professeur }}</td>
         <td>{{ ue.effectif }}</td>
+        <td>{% if ue.besoin_labo %}Oui{% else %}Non{% endif %}</td>
     </tr>
-
     {% endfor %}
-
 </table>
+</div>
 
 {% endblock %}
