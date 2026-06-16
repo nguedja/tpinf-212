@@ -102,3 +102,16 @@ def telecharger_planning_pdf():
         as_attachment=True,
         download_name="planning.pdf"
     )
+
+
+@planning_bp.route("/rapport")
+def telecharger_rapport():
+
+    from rapport import creer_rapport
+    chemin = creer_rapport()
+
+    return send_file(
+        chemin,
+        as_attachment=True,
+        download_name="rapport_examplanner.docx"
+    )
